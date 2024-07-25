@@ -1,12 +1,14 @@
 import pandas as pd
-import matplotlib
 import matplotlib.pyplot as plt
+
+startDate = '2024-07-01'
+endDate = '2024-07-02'
 
 df = pd.read_csv('cycles.csv')
 df.columns = ['Timestamp', 'State', 'Duration']
 df['Timestamp'] = pd.to_datetime(df['Timestamp'], format='ISO8601').dt.tz_convert('US/Pacific')
 df['Duration'] = pd.to_timedelta(df['Duration'])
-mask = (df['Timestamp'] > '2024-07-01') & (df['Timestamp'] < '2024-07-02')
+mask = (df['Timestamp'] > startDate) & (df['Timestamp'] < endDate)
 df = df.loc[mask]
 df = df.set_index('Timestamp')
 
